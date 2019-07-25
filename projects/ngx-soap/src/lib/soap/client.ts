@@ -356,7 +356,7 @@ Client.prototype._invoke = function(method, args, location, options, extraHeader
       });
     }
 
-    return { err: null, result, responseBody, header: obj.Header, xml };
+    return { err: null, result, responseBody, header: obj.Header, xml, httpHeaders: response.headers };
   }
 };
 

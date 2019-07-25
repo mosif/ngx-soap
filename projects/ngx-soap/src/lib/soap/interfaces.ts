@@ -199,6 +199,7 @@ export interface ISoapMethodResponse {
     responseBody: string,
     xml: string;
     result: any;
+    httpHeaders: any;
 }
 
 export interface ISecurity {
