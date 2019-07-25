@@ -283,7 +283,7 @@ Client.prototype._invoke = function(method, args, location, options, extraHeader
   };
 
   console.log('url:', location)
-  
+
   return (<HttpClient>self.httpClient).post(location, xml, {
     headers: headers,
     responseType: 'text', observe: 'response' }).pipe(
@@ -321,7 +321,9 @@ Client.prototype._invoke = function(method, args, location, options, extraHeader
 
   function finish(obj, responseBody, response) {
     let result = null;
-
+    console.log('obj', obj);
+    console.log('responseBody', responseBody);
+    console.log('response', response);
     if (!output){
       // one-way, no output expected
       return { err: null, response: null, responseBody, header: obj.Header, xml };
@@ -329,14 +331,14 @@ Client.prototype._invoke = function(method, args, location, options, extraHeader
 
     // If it's not HTML and Soap Body is empty
     if (!obj.html && !obj.Body) {
-      return  { err: null, obj, responseBody, header: obj.Header, xml }; 
+      return  { err: null, obj, responseBody, header: obj.Header, xml };
     }
 
     if( typeof obj.Body !== 'object' ) {
       const error: any = new Error('Cannot parse response');
       error.response = response;
       error.body = responseBody;
-      return { err: error, obj, responseBody, header: undefined, xml }; 
+      return { err: error, obj, responseBody, header: undefined, xml };
     }
 
     result = obj.Body[output.$name];
@@ -353,8 +355,8 @@ Client.prototype._invoke = function(method, args, location, options, extraHeader
         }
       });
     }
-    
-    return { err: null, result, responseBody, header: obj.Header, xml }; 
+
+    return { err: null, result, responseBody, header: obj.Header, xml };
   }
 };
 
